@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div :class="`app theme-${themeName}`">
+    <change-theme/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import changeTheme from '@/components/ChangeTheme'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+    components: {changeTheme},
+    data() {
+      return {
+        themeName: 'blue',
+      }
+    },
+    provide() {
+      return {
+        themeNameK: this.themeName,
+        turnColorK: this.turnColor
+      }
+    },
+    methods: {
+      turnColor() {
+        this.themeName === 'blue' ? this.themeName = 'red' : this.themeName = 'blue'
+      }
+    }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .app.theme-blue button {
+    background-color: blue;
+    color: white;
+  }
+
+  .app.theme-red button {
+    background-color: red;
+    color: white;
+  }
 </style>
