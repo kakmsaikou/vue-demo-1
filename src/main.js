@@ -10,7 +10,7 @@ new Vue({
   }
 ).$mount('#app')
 
-const x = 2
+const x = 3
 if(x===1){
   console.log(1)
 }
